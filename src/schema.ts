@@ -1,6 +1,7 @@
-import { buildSchema } from "graphql";
+import { makeExecutableSchema } from "graphql-tools";
+import { resolvers } from "./resolver";
 
-export const schema = buildSchema(`
+const typeDefs = `
     type User {
         id: ID
         name: String
@@ -11,4 +12,11 @@ export const schema = buildSchema(`
     type Query {
         profile: User
     }
-`);
+`;
+
+const schema = makeExecutableSchema({
+  typeDefs,
+  resolvers,
+});
+
+export default schema;
