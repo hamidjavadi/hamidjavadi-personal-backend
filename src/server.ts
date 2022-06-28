@@ -1,21 +1,13 @@
-import express from "express";
-import { graphqlHTTP } from "express-graphql";
-import schema from "./schema";
+import apolloServer from "./server-apollo";
+import { config } from "./config";
+import expressServer from "./server-express";
 
-const app = express();
-
-app.get("/", (req, res) => {
-  res.send("hello from simple server :)");
-});
-
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  })
-);
-
-app.listen(8080, () => {
-  console.log("Server is running on port 8080");
-});
+if (config.useExpress) {
+  expressServer.listen(4000, () => {
+    console.log(`Express GraphQL server is running... \nhttp://localhost:4000`);
+  });
+} else {
+  apolloServer.listen().then(() => {
+    console.log(`Apollo GraphQL server is running... \nhttp://localhost:4000`);
+  });
+}
