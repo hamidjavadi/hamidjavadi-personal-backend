@@ -1,4 +1,4 @@
-export const resolvers = {
+const resolvers = {
   Query: {
     profile: () => {
       return {
@@ -9,5 +9,6 @@ export const resolvers = {
       };
     },
   },
-  Mutation: {},
 };
+
+export default resolvers;

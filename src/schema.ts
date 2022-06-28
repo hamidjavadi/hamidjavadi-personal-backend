@@ -1,18 +1,6 @@
-import { makeExecutableSchema } from "graphql-tools";
-import { resolvers } from "./resolver";
-
-const typeDefs = `
-    type User {
-        id: ID
-        name: String
-        family: String
-        email: String
-    }    
-
-    type Query {
-        profile: User
-    }
-`;
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import resolvers from "./resolver";
+import typeDefs from "./type.defs";
 
 const schema = makeExecutableSchema({
   typeDefs,
