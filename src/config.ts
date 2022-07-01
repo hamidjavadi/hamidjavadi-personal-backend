@@ -1,6 +1,6 @@
 export const config = {
   useExpress: true,
   database: {
-    url: 'mongodb://127.0.0.1:27017/',
+    connectionString: 'mongodb://db_admin:123@127.0.0.1:27017/hamidjavadi',
   },
 };
