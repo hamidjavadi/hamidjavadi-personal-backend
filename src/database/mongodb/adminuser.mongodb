@@ -1,0 +1,14 @@
+const database = "hamidjavadi";
+
+use(database);
+
+db.createUser({
+  user:"db_admin",
+  pwd: passwordPrompt(),
+  roles:[
+    {
+      role:"readWrite",
+      db: database
+    }
+  ]
+})
