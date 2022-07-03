@@ -1,0 +1,13 @@
+const database = 'hamidjavadi';
+
+use(database);
+
+db.users.insertOne({
+  name: "Hamid",
+  family: "Javadi",
+  email: "info@server.com",
+  password: "$2b$10$y5Xzoq2sl5FPEPvuiQgWLurm1NtM6qDqj3uKCfRhRqYJjWSE4wiGq",
+  image_url: "https://hamidjavadi.com/assets/template/hamidjavadi/img/logo-hamid-javadi.jpg",
+  role: "ADMIN",
+  status: "ACTIVE"
+})
