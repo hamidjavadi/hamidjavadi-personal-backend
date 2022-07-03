@@ -1,0 +1,49 @@
+const database = 'hamidjavadi';
+const collection = "users";
+
+// The current database to use.
+use(database);
+
+// The prototype form to create a regular collection:
+db.createCollection(collection, {
+    capped: false,
+    validator: {$jsonSchema: {
+      bsonType: "object",
+      required: ["email", "password", "role", "status"],
+      properties: {
+        name: {
+          bsonType: "string",
+          description: "The name of the user"
+        },
+        family: {
+          bsonType: "string",
+          description: "The family of the user"
+        },
+        email: {
+          bsonType: "string",
+          description: "The email of the user"
+        },
+        password: {
+          bsonType: "string",
+          description: "The password of the user"
+        },
+        image_url: {
+          bsonType: "string",
+          description: "The user picture for their profile"
+        },
+        role: {
+          enum: ["ADMIN", "USER"],
+          description: "The user's role used for authorization"
+        },
+        status: {
+          enum: ["ACTIVE", "SUSPEND", "PENDING", "BANNED"],
+          description: "The user status"
+        },
+        last_login_at: {
+          bsonType: "string",
+          description: "The latest time that user logged in"
+        }
+      }
+    }
+  }
+});
