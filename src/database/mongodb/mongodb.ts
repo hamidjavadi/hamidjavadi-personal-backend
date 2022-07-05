@@ -1,17 +1,17 @@
 import { config } from '../../config';
 import mongoose from 'mongoose';
 
-const mongooseConnection = mongoose.connection;
+const { connection } = mongoose;
 
-mongooseConnection.on(
+connection.on(
   'error',
   console.error.bind(console, 'connection error: ')
 );
 
-mongooseConnection.once('open', () =>
+connection.once('open', () =>
   console.log('Connection stablished successfully')
 );
 
 mongoose.connect(config.database.connectionString);
 
-export { mongooseConnection };
+export { connection as mongooseConnection };
