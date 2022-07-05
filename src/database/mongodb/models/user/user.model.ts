@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, model, Model, Schema} from 'mongoose';
 
 export enum UserRole {
   'ADMIN',
@@ -12,22 +12,43 @@ export enum UserStatus {
   'BANNED',
 }
 
-const userSchema = new mongoose.Schema(
+export interface IUser extends Document {
+  name: { type: String },
+  family: { type: String },
+  email: { type: String, required: true },
+  password: { type: String, required: true },
+  image_url: { type: String },
+  role: {
+    type: String,
+    enum: UserRole
+  },
+  status: {
+    type: String,
+    enum: UserStatus
+  },
+  last_login_at: { type: Date },
+}
+
+const userSchema = new Schema(
   {
     name: { type: String },
     family: { type: String },
     email: { type: String, required: true },
     password: { type: String, required: true },
     image_url: { type: String },
-    role: { type: UserRole },
-    status: { type: UserStatus },
-    last_login_at: { type: Date },
+    role: {
+    type: String,
+    enum: UserRole
+  },
+  status: {
+    type: String,
+    enum: UserStatus
+  },
+  last_login_at: { type: Date },
   },
   {
     timestamps: true,
   }
 );
 
-const UserModel = mongoose.model('User', userSchema);
-
-export { UserModel };
+export const UserModel:Model<IUser> = model<IUser>('User', userSchema);
