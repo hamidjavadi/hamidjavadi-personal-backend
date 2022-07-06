@@ -1,54 +1,60 @@
-import mongoose, { Document, model, Model, Schema} from 'mongoose';
+import mongoose, { Document, model, Model, Schema } from 'mongoose';
 
 export enum UserRole {
-  'ADMIN',
-  'USER',
+  'ADMIN' = 'ADMIN',
+  'USER' = 'USER',
 }
 
 export enum UserStatus {
-  'ACTIVE',
-  'SUSPEND',
-  'PENDING',
-  'BANNED',
+  'ACTIVE' = 'ACTIVE',
+  'SUSPEND' = 'SUSPEND',
+  'PENDING' = 'PENDING',
+  'BANNED' = 'BANNED',
 }
 
 export interface IUser extends Document {
-  name: { type: String },
-  family: { type: String },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  image_url: { type: String },
+  uuid: { type: String; readonly: true; required: true; index: true };
+  name: { type: String };
+  family: { type: String };
+  email: { type: String; required: true };
+  password: { type: String; required: true };
+  image_url: { type: String };
   role: {
-    type: String,
-    enum: UserRole
-  },
+    type: String;
+    enum: UserRole;
+    default: UserRole.USER;
+  };
   status: {
-    type: String,
-    enum: UserStatus
-  },
-  last_login_at: { type: Date },
+    type: String;
+    enum: UserStatus;
+    default: UserStatus.PENDING;
+  };
+  last_login_at: { type: Date };
 }
 
-const userSchema = new Schema(
+export const userSchema = new Schema(
   {
+    uuid: { type: String, readonly: true, required: true, index: true },
     name: { type: String },
     family: { type: String },
     email: { type: String, required: true },
     password: { type: String, required: true },
     image_url: { type: String },
     role: {
-    type: String,
-    enum: UserRole
-  },
-  status: {
-    type: String,
-    enum: UserStatus
-  },
-  last_login_at: { type: Date },
+      type: String,
+      enum: UserRole,
+      default: UserRole.USER,
+    },
+    status: {
+      type: String,
+      enum: UserStatus,
+      default: UserStatus.PENDING,
+    },
+    last_login_at: { type: Date },
   },
   {
     timestamps: true,
   }
 );
 
-export const UserModel:Model<IUser> = model<IUser>('User', userSchema);
+export const UserModel: Model<IUser> = model<IUser>('User', userSchema);
