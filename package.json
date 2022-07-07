@@ -2,7 +2,7 @@
   "name": "hamid-javadi-server",
   "version": "1.0.0",
   "description": "Hamidjavadi personal website server",
-  "main": "./src/server.js",
+  "main": "./dist/src/server.js",
   "scripts": {
     "start": "ts-node-dev --respawn ./src/server.ts",
     "test": "jest --watchAll",
